@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+Use App\Product;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +16,22 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('product', 'ProductController@index');
+
+Route::get('product/{id}', function($id) {
+    return Product::find($id);
+});
+
+Route::post('product', 'ProductController@create');
+
+Route::put('product/{id}', 'ProductController@update');
+
+Route::delete('product/{id}', function($id) {
+    Product::find($id)->delete();
+
+    return 204;
+});
+
+
